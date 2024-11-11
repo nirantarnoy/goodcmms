@@ -1,10 +1,7 @@
 <?php
-
 namespace backend\models;
-
 use Yii;
 use yii\db\ActiveRecord;
-
 date_default_timezone_set('Asia/Bangkok');
 
 class Warehouse extends \common\models\Warehouse
@@ -12,76 +9,63 @@ class Warehouse extends \common\models\Warehouse
     public function behaviors()
     {
         return [
-            'timestampcdate' => [
-                'class' => \yii\behaviors\AttributeBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
+            'timestampcdate'=>[
+                'class'=> \yii\behaviors\AttributeBehavior::className(),
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_INSERT=>'created_at',
                 ],
-                'value' => time(),
+                'value'=> time(),
             ],
-            'timestampudate' => [
-                'class' => \yii\behaviors\AttributeBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'updated_at',
+            'timestampudate'=>[
+                'class'=> \yii\behaviors\AttributeBehavior::className(),
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_INSERT=>'updated_at',
                 ],
-                'value' => time(),
+                'value'=> time(),
             ],
-            'timestampcby' => [
-                'class' => \yii\behaviors\AttributeBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_by',
+            'timestampcby'=>[
+                'class'=> \yii\behaviors\AttributeBehavior::className(),
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_INSERT=>'created_by',
                 ],
-                'value' => Yii::$app->user->id,
+                'value'=> Yii::$app->user->identity->id,
             ],
-            'timestamuby' => [
-                'class' => \yii\behaviors\AttributeBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_by',
+            'timestamuby'=>[
+                'class'=> \yii\behaviors\AttributeBehavior::className(),
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_UPDATE=>'updated_by',
                 ],
-                'value' => Yii::$app->user->id,
+                'value'=> Yii::$app->user->identity->id,
             ],
-//            'timestampcompany' => [
-//                'class' => \yii\behaviors\AttributeBehavior::className(),
-//                'attributes' => [
-//                    ActiveRecord::EVENT_BEFORE_INSERT => 'company_id',
-//                ],
-//                'value' => isset($_SESSION['user_company_id']) ? $_SESSION['user_company_id'] : 1,
-//            ],
-//            'timestampbranch' => [
-//                'class' => \yii\behaviors\AttributeBehavior::className(),
-//                'attributes' => [
-//                    ActiveRecord::EVENT_BEFORE_INSERT => 'branch_id',
-//                ],
-//                'value' => isset($_SESSION['user_branch_id']) ? $_SESSION['user_branch_id'] : 1,
-//            ],
-            'timestampupdate' => [
-                'class' => \yii\behaviors\AttributeBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+            'timestampupdate'=>[
+                'class'=> \yii\behaviors\AttributeBehavior::className(),
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_UPDATE=>'updated_at',
                 ],
-                'value' => time(),
+                'value'=> time(),
             ],
         ];
     }
 
-     public static function findName($id){
-        $model = Warehouse::find()->where(['id'=>$id])->one();
-        return $model != null ?$model->name:'';
-    }
-    public static function findDesc($id){
-        $model = Warehouse::find()->where(['id'=>$id])->one();
-        return $model != null ?$model->description:'';
-    }
-
-//    public static function findName($id){
-//        $model = \common\models\RoutePlan::find()->where(['id'=>$id])->one();
-//        return $model!= null?$model->name:'';
+//    public function findCode($id){
+//        $model = Customer::find()->where(['id'=>$id])->one();
+//        return count($model)>0?$model->code:'';
 //    }
-//    public function findUnitid($code){
-//        $model = Unit::find()->where(['name'=>$code])->one();
+//    public function findFullname($id){
+//        $model = Customer::find()->where(['id'=>$id])->one();
+//        return count($model)>0?$model->code." ".$model->first_name.' '.$model->last_name:'';
+//    }
+    public function findName($id){
+        $model = Warehouse::find()->where(['id'=>$id])->one();
+        return $model != null?$model->name:'';
+    }
+//    public function findId($code){
+//        $model = Customer::find()->where(['code'=>$code])->one();
 //        return count($model)>0?$model->id:0;
 //    }
-
-
+//    public function findPhone($id){
+//        $model = Customer::find()->where(['code'=>$id])->one();
+//        return count($model)>0?$model->phone:'';
+//    }
 
 }

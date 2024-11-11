@@ -1,23 +1,22 @@
-<?php
+์<?php
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/** @var yii\web\View $this */
-/** @var backend\models\Warehouse $model */
+/* @var $this yii\web\View */
+/* @var $model backend\models\Warehouse */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'คลังสินค้า', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'สโตร์', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="warehouse-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('แก้ไข', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('ลบ', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -29,13 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+//            'id',
+            'code',
             'name',
             'description',
-            'company_id',
             'status',
+            'isdefault',
             'created_at',
-            'created_by',
             'updated_at',
+            'created_by',
             'updated_by',
         ],
     ]) ?>

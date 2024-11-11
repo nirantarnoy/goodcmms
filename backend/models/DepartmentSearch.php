@@ -11,16 +11,17 @@ use backend\models\Department;
  */
 class DepartmentSearch extends Department
 {
-    public $globalSearch;
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
+
     public function rules()
     {
         return [
-            [['id', 'status', 'company_id', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['code', 'name'], 'safe'],
-            [['globalSearch'],'string'],
+            [['id', 'site_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['code', 'name', 'description'], 'safe'],
+            [['globalSearch'], 'string'],
         ];
     }
 
@@ -59,21 +60,18 @@ class DepartmentSearch extends Department
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
-            'company_id' => $this->company_id,
-            'created_at' => $this->created_at,
-            'created_by' => $this->created_by,
-            'updated_at' => $this->updated_at,
-            'updated_by' => $this->updated_by,
-        ]);
+//        $query->andFilterWhere([
+//            'id' => $this->id,
+//            'site_id' => $this->site_id,
+//            'created_at' => $this->created_at,
+//            'updated_at' => $this->updated_at,
+//            'created_by' => $this->created_by,
+//            'updated_by' => $this->updated_by,
+//        ]);
 
-        if($this->globalSearch != ''){
-            $query->orFilterWhere(['like', 'code', $this->globalSearch])
-                ->orFilterWhere(['like', 'name', $this->globalSearch]);
-        }
-
+        $query->orFilterWhere(['like', 'code', $this->globalSearch])
+            ->orFilterWhere(['like', 'name', $this->globalSearch])
+            ->orFilterWhere(['like', 'description', $this->globalSearch]);
 
         return $dataProvider;
     }

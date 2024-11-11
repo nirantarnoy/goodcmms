@@ -23,20 +23,20 @@ class Unit extends \common\models\Unit
                 ],
                 'value'=> time(),
             ],
-//            'timestampcby'=>[
-//                'class'=> \yii\behaviors\AttributeBehavior::className(),
-//                'attributes'=>[
-//                    ActiveRecord::EVENT_BEFORE_INSERT=>'created_by',
-//                ],
-//                'value'=> Yii::$app->user->identity->id,
-//            ],
-//            'timestamuby'=>[
-//                'class'=> \yii\behaviors\AttributeBehavior::className(),
-//                'attributes'=>[
-//                    ActiveRecord::EVENT_BEFORE_UPDATE=>'updated_by',
-//                ],
-//                'value'=> Yii::$app->user->identity->id,
-//            ],
+            'timestampcby'=>[
+                'class'=> \yii\behaviors\AttributeBehavior::className(),
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_INSERT=>'created_by',
+                ],
+                'value'=> Yii::$app->user->identity->id,
+            ],
+            'timestamuby'=>[
+                'class'=> \yii\behaviors\AttributeBehavior::className(),
+                'attributes'=>[
+                    ActiveRecord::EVENT_BEFORE_UPDATE=>'updated_by',
+                ],
+                'value'=> Yii::$app->user->identity->id,
+            ],
             'timestampupdate'=>[
                 'class'=> \yii\behaviors\AttributeBehavior::className(),
                 'attributes'=>[
@@ -47,17 +47,25 @@ class Unit extends \common\models\Unit
         ];
     }
 
-//    public function findUnitname($id){
-//        $model = Unit::find()->where(['id'=>$id])->one();
-//        return count($model)>0?$model->name:'';
+//    public function findCode($id){
+//        $model = Customer::find()->where(['id'=>$id])->one();
+//        return count($model)>0?$model->code:'';
 //    }
-    public static function findName($id){
-        $model = Unit::find()->where(['id'=>$id])->one();
-        return $model!= null?$model->name:'';
-    }
-//    public function findUnitid($code){
-//        $model = Unit::find()->where(['name'=>$code])->one();
+//    public function findFullname($id){
+//        $model = Customer::find()->where(['id'=>$id])->one();
+//        return count($model)>0?$model->code." ".$model->first_name.' '.$model->last_name:'';
+//    }
+//    public function findName($id){
+//        $model = Customer::find()->where(['id'=>$id])->one();
+//        return count($model)>0?$model->first_name.' '.$model->last_name:'';
+//    }
+//    public function findId($code){
+//        $model = Customer::find()->where(['code'=>$code])->one();
 //        return count($model)>0?$model->id:0;
+//    }
+//    public function findPhone($id){
+//        $model = Customer::find()->where(['code'=>$id])->one();
+//        return count($model)>0?$model->phone:'';
 //    }
 
 }

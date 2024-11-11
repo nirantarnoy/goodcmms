@@ -2,11 +2,11 @@
 
 use yii\helpers\Html;
 
-/** @var yii\web\View $this */
-/** @var backend\models\Warehouse $model */
+/* @var $this yii\web\View */
+/* @var $model backend\models\Warehouse */
 
-$this->title = 'แก้ไขคลังสินค้า: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'คลังสินค้า', 'url' => ['index']];
+$this->title = 'แก้ไขสโตร์: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'สโตร์', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'แก้ไข';
 ?>

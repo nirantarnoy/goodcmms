@@ -11,13 +11,16 @@ use backend\models\User;
  */
 class UserSearch extends User
 {
+    /**
+     * {@inheritdoc}
+     */
     public $globalSearch;
     public function rules()
     {
         return [
             [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
-            [['globalSearch'],'string']
+            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['globalSearch'], 'string'],
         ];
     }
 
@@ -56,18 +59,18 @@ class UserSearch extends User
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+//        $query->andFilterWhere([
+//            'id' => $this->id,
+//            'status' => $this->status,
+//            'created_at' => $this->created_at,
+//            'updated_at' => $this->updated_at,
+//        ]);
 
-        if($this->globalSearch !=''){
-            $query->orFilterWhere(['like', 'username', $this->globalSearch])
-                ->orFilterWhere(['like', 'email', $this->globalSearch]);
-        }
-
+        $query->orFilterWhere(['like', 'username', $this->globalSearch])
+            ->orFilterWhere(['like', 'auth_key', $this->globalSearch])
+            ->orFilterWhere(['like', 'password_hash', $this->globalSearch])
+            ->orFilterWhere(['like', 'password_reset_token', $this->globalSearch])
+            ->orFilterWhere(['like', 'email', $this->globalSearch]);
 
         return $dataProvider;
     }

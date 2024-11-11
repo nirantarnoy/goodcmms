@@ -1,15 +1,20 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
-use yii\bootstrap4\LinkPager;
-$this->title = Yii::t('app', 'พนักงาน');
+
+/* @var $this yii\web\View */
+/* @var $searchModel backend\models\EmployeeSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'พนักงาน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-index">
-    <?php Pjax::begin(); ?>
+
+    <br>
     <div class="row">
         <div class="col-lg-10">
             <p>
@@ -31,11 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </form>
         </div>
     </div>
-    <?php echo $this->render('_search', ['model' => $searchModel,'viewstatus'=>$viewstatus]); ?>
+
+    <?php Pjax::begin(); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'emptyCell' => '-',
         'layout' => "{items}\n{summary}\n<div class='text-center'>{pager}</div>",
         'summary' => "แสดง {begin} - {end} ของทั้งหมด {totalCount} รายการ",
@@ -47,42 +54,28 @@ $this->params['breadcrumbs'][] = $this->title;
         //'tableOptions' => ['class' => 'table table-hover'],
         'emptyText' => '<div style="color: red;text-align: center;"> <b>ไม่พบรายการไดๆ</b> <span> เพิ่มรายการโดยการคลิกที่ปุ่ม </span><span class="text-success">"สร้างใหม่"</span></div>',
         'columns' => [
-            [
-                'class' => 'yii\grid\SerialColumn',
-                'headerOptions' => ['style' => 'text-align:center;'],
-                'contentOptions' => ['style' => 'text-align: center'],
-            ],
+            ['class' => 'yii\grid\SerialColumn'],
 
-            //  'id',
-            'code',
-            'fname',
-            'lname',
-            [
-                'attribute' => 'gender',
-                'value' => function ($data) {
-                    return \backend\helpers\GenderType::getTypeById($data->gender);
-                }
-            ],
-            [
-                'attribute' => 'position',
-                'value' => function ($data) {
-                    return \backend\models\Position::findName($data->position);
-                }
-            ],
-            [
-                'attribute' => 'status',
-                'format' => 'raw',
-                'headerOptions' => ['style' => 'text-align: center'],
-                'contentOptions' => ['style' => 'text-align: center'],
-                'value' => function ($data) {
-                    if ($data->status == 1) {
-                        return '<div class="badge badge-success">ใช้งาน</div>';
-                    } else {
-                        return '<div class="badge badge-secondary">ไม่ใช้งาน</div>';
-                    }
-                }
-            ],
-
+//            'id',
+            'emp_code',
+            'prefix',
+            'first_name',
+            'last_name',
+            //'nickname',
+            //'phone',
+            //'email:email',
+            //'note',
+            //'site_id',
+            //'department_id',
+            //'section_id',
+            //'position_id',
+            //'user_relation',
+            //'photo_profile',
+            //'status',
+            //'created_at',
+            //'updated_at',
+            //'created_by',
+            //'updated_by',
             [
 
                 'header' => 'ตัวเลือก',
@@ -130,12 +123,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                         return Html::a('<span class="fas fa-trash-alt btn btn-xs btn-default"></span>', 'javascript:void(0)', $options);
                     }
-                ]
+                ],
             ],
+
+//            ['class' => 'yii\grid\ActionColumn'],
         ],
-        'pager' => ['class' => LinkPager::className()],
     ]); ?>
-
     <?php Pjax::end(); ?>
-
 </div>

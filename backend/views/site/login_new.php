@@ -39,16 +39,10 @@ use yii\helpers\Html;
         <!-- /.login-logo -->
         <div class="card" style="margin-top: 0px;">
             <div class="card-body login-card-body">
-<!--                <div style="text-align: center">-->
-<!--                    <h1 style="color: #2b669a"><b>วรภัทร</b></h1>-->
-<!--                </div>-->
-
                 <div class="login-logo">
                     <a href="#">
-                        <img src="../../backend/web/uploads/logo/mmc_new.png" width="100%" alt="">
+                        <img src="../../backend/web/uploads/logo/pm_logo.png" width="25%" alt="">
                     </a>
-<!--                    <h1 style="color: dodgerblue">MMC</h1>-->
-<!--                    <h1 style="color: dodgerblue">Material</h1>-->
                 </div>
                 <p class="login-box-msg">ลงชื่อเข้าเพื่อเข้าใช้งานระบบของคุณ</p>
                 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
@@ -62,6 +56,25 @@ use yii\helpers\Html;
                         <?= $form->field($model, 'password')->passwordInput(['class' => 'form-control', 'placeholder' => 'Password']) ?>
                     </div>
                 </div>
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-12">-->
+<!--                        --><?php //= $form->field($model, 'captcha')->widget(Captcha::className(),
+//                            [
+//                                'imageOptions' => [
+//                                    'id' => 'my-captcha-image'
+//                                ],
+//                                'template' => '<div class="col-lg-12">{image} <a href="javascript:void(0);" id="refresh_captcha"><i class="fas fa-sync"></i> รีเฟรช</a></div><div class="col-lg-12">{input}</div>',
+//
+//                            ]
+//                        )->label('CAPTCHA'); ?>
+<!--                        --><?php ////echo  $form->field($model, 'captcha')->widget(Captcha::className(),
+//                        //                    ['template' => '<div class="captcha_img">{image}</div>'
+//                        //                        . '<a class="refreshcaptcha" href="#">'
+//                        //                        . Html::img('/images/imageName.png',[]).'</a>'
+//                        //                        . 'Verification Code{input}',
+//                        //                    ])->label(FALSE); ?>
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="row">
                     <div class="col-8">
                         <div class="icheck-primary">
@@ -72,16 +85,10 @@ use yii\helpers\Html;
                         </div>
                     </div>
                     <!-- /.col -->
-<!--                    <div class="col-4">-->
-<!--                        <button type="submit" class="btn btn-primary btn-block">เข้าใช้งาน</button>-->
-<!--                    </div>-->
-                    <!-- /.col -->
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-lg-12">
-                        <button type="submit" class="btn btn-primary btn-block">เข้าใช้งาน</button>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-outline-success btn-block">เข้าใช้งาน</button>
                     </div>
+                    <!-- /.col -->
                 </div>
                 <?php ActiveForm::end() ?>
 
@@ -96,9 +103,9 @@ use yii\helpers\Html;
                 </div>
                 <!-- /.social-auth-links -->
 
-<!--                <p class="mb-1">-->
-<!--                    <a href="forgot-password.html" style="color: #00A000">ลืมรหัสผ่าน ?</a>-->
-<!--                </p>-->
+                <p class="mb-1">
+                    <a href="forgot-password.html">ลืมรหัสผ่าน?</a>
+                </p>
                 <!--      <p class="mb-0">-->
                 <!--        <a href="register.html" class="text-center">Register a new membership</a>-->
                 <!--      </p>-->

@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
+use Yii;
 use backend\models\Unit;
 use backend\models\UnitSearch;
-use backend\models\UsergroupSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,34 +15,31 @@ use yii\filters\VerbFilter;
 class UnitController extends Controller
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
                 ],
-            ]
-        );
+            ],
+        ];
     }
 
     /**
      * Lists all Unit models.
-     *
-     * @return string
+     * @return mixed
      */
     public function actionIndex()
     {
         $pageSize = \Yii::$app->request->post("perpage");
+
         $searchModel = new UnitSearch();
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
-        $dataProvider->setSort(['defaultOrder' => ['id' => SORT_DESC]]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         $dataProvider->pagination->pageSize = $pageSize;
 
         return $this->render('index', [
@@ -54,8 +51,8 @@ class UnitController extends Controller
 
     /**
      * Displays a single Unit model.
-     * @param int $id ID
-     * @return string
+     * @param integer $id
+     * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
@@ -68,18 +65,14 @@ class UnitController extends Controller
     /**
      * Creates a new Unit model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return mixed
      */
     public function actionCreate()
     {
         $model = new Unit();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -90,15 +83,15 @@ class UnitController extends Controller
     /**
      * Updates an existing Unit model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
+     * @param integer $id
+     * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -110,8 +103,8 @@ class UnitController extends Controller
     /**
      * Deletes an existing Unit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
+     * @param integer $id
+     * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
@@ -124,13 +117,13 @@ class UnitController extends Controller
     /**
      * Finds the Unit model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
+     * @param integer $id
      * @return Unit the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Unit::findOne(['id' => $id])) !== null) {
+        if (($model = Unit::findOne($id)) !== null) {
             return $model;
         }
 

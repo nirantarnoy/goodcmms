@@ -1,7 +1,7 @@
 <?php
 
 use yii\web\Session;
-$this->title = 'Restore ข้อมูล';
+$this->title = 'Restore';
 $this->params['breadcrumbs'][] = '/ '.$this->title;
 
 ?>
@@ -10,12 +10,11 @@ $this->params['breadcrumbs'][] = '/ '.$this->title;
        <?=\Yii::$app->session->getFlash('msg')?>
    </div>
 <?php endif;?>
-<br>
 <div class="panel panel-headline">
-<!--    <div class="panel-heading">-->
-<!--        <br>-->
-<!--        <h3>Restore ข้อมูล</h3>-->
-<!--    </div>-->
+    <div class="panel-heading">
+        <br>
+        <h3>Restore ข้อมูล</h3>
+    </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-12">

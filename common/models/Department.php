@@ -8,14 +8,14 @@ use Yii;
  * This is the model class for table "department".
  *
  * @property int $id
- * @property string|null $code
- * @property string|null $name
- * @property int|null $status
- * @property int|null $company_id
- * @property int|null $created_at
- * @property int|null $created_by
- * @property int|null $updated_at
- * @property int|null $updated_by
+ * @property string $code
+ * @property string $name
+ * @property string $description
+ * @property int $site_id
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $created_by
+ * @property int $updated_by
  */
 class Department extends \yii\db\ActiveRecord
 {
@@ -33,8 +33,8 @@ class Department extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'company_id', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['code', 'name'], 'string', 'max' => 255],
+            [['site_id', 'created_at', 'updated_at', 'created_by', 'updated_by','status'], 'integer'],
+            [['code', 'name', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,11 +47,12 @@ class Department extends \yii\db\ActiveRecord
             'id' => 'ID',
             'code' => 'รหัส',
             'name' => 'ชื่อ',
-            'status' => 'สถานะ',
-            'company_id' => 'Company ID',
-            'created_at' => 'Created At',
+            'description' => 'รายละเอียด',
+            'site_id' => 'Site ID',
+            'created_at' => 'สร้างเมื่อ',
+            'updated_at' => 'แก้ไขเมื่อ',
+            'status'=>'สถานะ',
             'created_by' => 'Created By',
-            'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
         ];
     }

@@ -2,17 +2,15 @@
 
 use yii\helpers\Html;
 
-/** @var yii\web\View $this */
-/** @var backend\models\Department $model */
+/* @var $this yii\web\View */
+/* @var $model backend\models\Department */
 
-$this->title = 'สร้างข้อมูลแผนก';
-$this->params['breadcrumbs'][] = ['label' => 'ข้อมูลแผนก', 'url' => ['index']];
+$this->title = 'สร้างฝ่ายใหม่';
+$this->params['breadcrumbs'][] = ['label' => 'ฝ่าย', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-create">
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
 </div>

@@ -3,38 +3,28 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var backend\models\Warehouse $model */
-/** @var yii\widgets\ActiveForm $form */
+/* @var $this yii\web\View */
+/* @var $model backend\models\Warehouse */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="warehouse-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
-    <div class="row">
-        <div class="col-lg-4">
-            <?= $form->field($model, 'company_id')->widget(\kartik\select2\Select2::className(),[
-                'data'=>\yii\helpers\ArrayHelper::map(\backend\models\Company::find()->all(),'id','name'),
-                'options' => [
+    <?= $form->field($model, 'isdefault')->widget(\toxor88\switchery\Switchery::className())->label(false) ?>
 
-                ],
-                'pluginOptions' => [
-                    'allowClear'=> true,
-                ]
-            ]) ?>
-        </div>
-    </div>
-
-
-    <?php echo $form->field($model, 'status')->widget(\toxor88\switchery\Switchery::className(), ['options' => ['label' => '', 'class' => 'form-control']])->label() ?>
+    <?= $form->field($model, 'status')->widget(\toxor88\switchery\Switchery::className())->label(false) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<b class="text-danger">ยกเลิก</b>',['warehouse/index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('บันทึก', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

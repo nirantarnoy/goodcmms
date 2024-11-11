@@ -11,13 +11,17 @@ use backend\models\Usergroup;
  */
 class UsergroupSearch extends Usergroup
 {
+    /**
+     * {@inheritdoc}
+     */
     public $globalSearch;
+
     public function rules()
     {
         return [
-            [['id','status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['code', 'name', 'description'], 'safe'],
-            [['globalSearch'],'string']
+            [['id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'description'], 'safe'],
+            [['globalSearch'], 'string'],
         ];
     }
 
@@ -56,28 +60,17 @@ class UsergroupSearch extends Usergroup
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
-        ]);
+//        $query->andFilterWhere([
+//            'id' => $this->id,
+//            'status' => $this->status,
+//            'created_at' => $this->created_at,
+//            'updated_at' => $this->updated_at,
+//            'created_by' => $this->created_by,
+//            'updated_by' => $this->updated_by,
+//        ]);
 
-        if (!empty(\Yii::$app->user->identity->company_id)) {
-            $query->andFilterWhere(['company_id' => \Yii::$app->user->identity->company_id]);
-        }
-        if (!empty(\Yii::$app->user->identity->branch_id)) {
-            $query->andFilterWhere(['branch_id' => \Yii::$app->user->identity->branch_id]);
-        }
-
-        if($this->globalSearch != ''){
-            $query->orFilterWhere(['like', 'code', $this->globalSearch])
-                ->orFilterWhere(['like', 'name', $this->globalSearch])
-                ->orFilterWhere(['like', 'description', $this->globalSearch]);
-
-        }
+        $query->orFilterWhere(['like', 'name', $this->globalSearch])
+            ->orFilterWhere(['like', 'description', $this->globalSearch]);
 
         return $dataProvider;
     }

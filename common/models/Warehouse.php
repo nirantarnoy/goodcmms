@@ -8,14 +8,15 @@ use Yii;
  * This is the model class for table "warehouse".
  *
  * @property int $id
- * @property string|null $name
- * @property string|null $description
- * @property int|null $company_id
- * @property int|null $status
- * @property int|null $created_at
- * @property int|null $created_by
- * @property int|null $updated_at
- * @property int|null $updated_by
+ * @property string $code
+ * @property string $name
+ * @property string $description
+ * @property int $status
+ * @property int $isdefault
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $created_by
+ * @property int $updated_by
  */
 class Warehouse extends \yii\db\ActiveRecord
 {
@@ -33,8 +34,9 @@ class Warehouse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['name', 'description'], 'string', 'max' => 255],
+            [['name'],'required'],
+            [['status', 'isdefault', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['code', 'name', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,13 +47,14 @@ class Warehouse extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'code' => 'รหัส',
             'name' => 'ชื่อ',
             'description' => 'รายละเอียด',
-            'company_id' => 'Company ID',
             'status' => 'สถานะ',
-            'created_at' => 'Created At',
-            'created_by' => 'Created By',
+            'isdefault' => 'เป็นสโตร์หลัก',
+            'created_at' => 'สร้างเมื่อ',
             'updated_at' => 'Updated At',
+            'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
     }

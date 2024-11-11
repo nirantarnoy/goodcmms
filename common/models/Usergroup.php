@@ -8,14 +8,13 @@ use Yii;
  * This is the model class for table "user_group".
  *
  * @property int $id
- * @property string|null $code
- * @property string|null $name
- * @property string|null $description
- * @property int|null $status
- * @property int|null $created_at
- * @property int|null $created_by
- * @property int|null $updated_at
- * @property int|null $updated_by
+ * @property string $name
+ * @property string $description
+ * @property int $status
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $created_by
+ * @property int $updated_by
  */
 class UserGroup extends \yii\db\ActiveRecord
 {
@@ -33,8 +32,9 @@ class UserGroup extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['code', 'name', 'description'], 'string', 'max' => 255],
+            [['name'],'required'],
+            [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,13 +45,12 @@ class UserGroup extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'code' => 'รหัส',
             'name' => 'ชื่อ',
             'description' => 'รายละเอียด',
             'status' => 'สถานะ',
             'created_at' => 'Created At',
-            'created_by' => 'Created By',
             'updated_at' => 'Updated At',
+            'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
     }

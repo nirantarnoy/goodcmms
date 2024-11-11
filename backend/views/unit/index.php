@@ -1,49 +1,50 @@
 <?php
 
-use backend\models\Unit;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use yii\widgets\LinkPager;
-
-/** @var yii\web\View $this */
-/** @var backend\models\UnitSearch $searchModel */
-/** @var yii\data\ActiveDataProvider $dataProvider */
+use yii\helpers\Url;
+/* @var $this yii\web\View */
+/* @var $searchModel backend\models\UnitSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'หน่วยนับ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="unit-index">
 
-    <?php Pjax::begin(); ?>
-    <div class="row">
-        <div class="col-lg-10">
-            <p>
-                <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> สร้างใหม่'), ['create'], ['class' => 'btn btn-success']) ?>
-            </p>
+    <div class="panel panel-body">
+
+
+        <br>
+        <div class="row">
+            <div class="col-lg-10">
+                <p>
+                    <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> สร้างใหม่'), ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
+            </div>
+            <div class="col-lg-2" style="text-align: right">
+                <form id="form-perpage" class="form-inline" action="<?= Url::to(['unit/index'], true) ?>"
+                      method="post">
+                    <div class="form-group">
+                        <label>แสดง </label>
+                        <select class="form-control" name="perpage" id="perpage">
+                            <option value="20" <?= $perpage == '20' ? 'selected' : '' ?>>20</option>
+                            <option value="50" <?= $perpage == '50' ? 'selected' : '' ?> >50</option>
+                            <option value="100" <?= $perpage == '100' ? 'selected' : '' ?>>100</option>
+                        </select>
+                        <label> รายการ</label>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="col-lg-2" style="text-align: right">
-            <form id="form-perpage" class="form-inline" action="<?= Url::to(['warehouse/index'], true) ?>"
-                  method="post">
-                <div class="form-group">
-                    <label>แสดง </label>
-                    <select class="form-control" name="perpage" id="perpage">
-                        <option value="20" <?= $perpage == '20' ? 'selected' : '' ?>>20</option>
-                        <option value="50" <?= $perpage == '50' ? 'selected' : '' ?> >50</option>
-                        <option value="100" <?= $perpage == '100' ? 'selected' : '' ?>>100</option>
-                    </select>
-                    <label> รายการ</label>
-                </div>
-            </form>
-        </div>
-    </div>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+        <?php Pjax::begin(); ?>
+        <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+       // 'filterModel' => $searchModel,
         'emptyCell' => '-',
         'layout' => "{items}\n{summary}\n<div class='text-center'>{pager}</div>",
         'summary' => "แสดง {begin} - {end} ของทั้งหมด {totalCount} รายการ",
@@ -55,28 +56,13 @@ $this->params['breadcrumbs'][] = $this->title;
         //'tableOptions' => ['class' => 'table table-hover'],
         'emptyText' => '<div style="color: red;text-align: center;"> <b>ไม่พบรายการไดๆ</b> <span> เพิ่มรายการโดยการคลิกที่ปุ่ม </span><span class="text-success">"สร้างใหม่"</span></div>',
         'columns' => [
-            [
-                'class' => 'yii\grid\SerialColumn',
-                'headerOptions' => ['style' => 'text-align: center'],
-                'contentOptions' => ['style' => 'text-align: center']],
+            ['class' => 'yii\grid\SerialColumn'],
+
+           // 'id',
             'code',
             'name',
             'description',
-            [
-                'attribute' => 'status',
-                'format' => 'raw',
-                'headerOptions' => ['style' => 'text-align: center'],
-                'contentOptions' => ['style' => 'text-align: center'],
-                'value' => function ($data) {
-                    if ($data->status == 1) {
-                        return '<div class="badge badge-success">ใช้งาน</div>';
-                    } else {
-                        return '<div class="badge badge-dark">ไม่ใช้งาน</div>';
-                    }
-                }
-            ],
-            //'company_id',
-            //'branch_id',
+            'status',
             //'created_at',
             //'updated_at',
             //'created_by',
@@ -84,11 +70,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
 
-                'header' => 'ตัวเลือก',
-                'headerOptions' => ['style' => 'text-align:center;', 'class' => 'activity-view-link',],
+                'header' => '',
+                'headerOptions' => ['style' => 'text-align:center;','class' => 'activity-view-link',],
                 'class' => 'yii\grid\ActionColumn',
-                'contentOptions' => ['style' => 'text-align: center'],
-                'template' => '{view} {update}{delete}',
+                'contentOptions' => ['style' => 'text-align: right','vertical-align: middle'],
                 'buttons' => [
                     'view' => function ($url, $data, $index) {
                         $options = [
@@ -132,9 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-        'pager' => ['class' => LinkPager::className()],
     ]); ?>
-
     <?php Pjax::end(); ?>
-
+</div>
 </div>

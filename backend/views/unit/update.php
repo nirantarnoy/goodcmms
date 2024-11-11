@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/** @var yii\web\View $this */
-/** @var backend\models\Unit $model */
+/* @var $this yii\web\View */
+/* @var $model backend\models\Unit */
 
 $this->title = 'แก้ไขหน่วยนับ: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'หน่วยนับ', 'url' => ['index']];
@@ -14,5 +14,4 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
 </div>

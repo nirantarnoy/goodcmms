@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var backend\models\DepartmentSearch $model */
-/** @var yii\widgets\ActiveForm $form */
+/* @var $this yii\web\View */
+/* @var $model backend\models\DepartmentSearch */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="department-search">
@@ -17,7 +17,6 @@ use yii\widgets\ActiveForm;
             'data-pjax' => 1
         ],
     ]); ?>
-
     <div class="row">
         <div class="col-lg-3">
             <!--         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>-->

@@ -1,5 +1,6 @@
 <?php
 
+use toxor88\switchery\Switchery;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,24 +13,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10">
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'status')->widget(\toxor88\switchery\Switchery::className())->label(false) ?>
+    <?= $form->field($model, 'status')->widget(Switchery::className())->label(false) ?>
 
-
-            <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            </div>
-
-        </div>
-        <div class="col-lg-1"></div>
+    <div class="form-group">
+        <?= Html::a('<b class="text-danger">ยกเลิก</b>',['usergroup/index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('บันทึก', ['class' => 'btn btn-primary']) ?>
     </div>
-
 
     <?php ActiveForm::end(); ?>
 

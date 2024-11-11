@@ -26,29 +26,29 @@ class DbbackupController extends Controller
     public function behaviors()
     {
         return [
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
-                    throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
-                },
-                'rules'=>[
+//            'access'=>[
+//                'class'=>AccessControl::className(),
+//                'denyCallback' => function ($rule, $action) {
+//                    throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
+//                },
+//                'rules'=>[
+////                    [
+////                        'allow'=>true,
+////                        'actions'=>['index','create','update','delete','view'],
+////                        'roles'=>['@'],
+////                    ]
 //                    [
 //                        'allow'=>true,
-//                        'actions'=>['index','create','update','delete','view'],
 //                        'roles'=>['@'],
+//                        'matchCallback'=>function($rule,$action){
+//                            $currentRoute = Yii::$app->controller->getRoute();
+//                            if(Yii::$app->user->can($currentRoute)){
+//                                return true;
+//                            }
+//                        }
 //                    ]
-                    [
-                        'allow'=>true,
-                        'roles'=>['@'],
-                        'matchCallback'=>function($rule,$action){
-                            $currentRoute = Yii::$app->controller->getRoute();
-                            if(Yii::$app->user->can($currentRoute)){
-                                return true;
-                            }
-                        }
-                    ]
-                ]
-            ],
+//                ]
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -60,6 +60,7 @@ class DbbackupController extends Controller
 
     public function actionBak()
     {
+
         $host = "localhost";
         $username = "root";
         $password = "";
@@ -231,9 +232,9 @@ class DbbackupController extends Controller
     {
         $host = "localhost";
         $username = "root";
+       // $password = "'" . "kie4410610217" . "'";
         $password = "";
-      //  $database_name = "admin_icesystem";
-        $database_name = "mmc_db";
+        $database_name = "goodoperpm";
         $date_string = time();
 
         $cmd = '';
@@ -364,7 +365,7 @@ class DbbackupController extends Controller
         if ($id != '') {
             unlink('../web/uploads/backup/' . $id);
         }
-        return $this->redirect(['dbbackup/backuplist']);
+        return $this->redirect(['dbmanagement/backuplist']);
     }
 
 }

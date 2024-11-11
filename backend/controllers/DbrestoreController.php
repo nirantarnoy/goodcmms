@@ -26,29 +26,29 @@ class DbrestoreController extends Controller
     public function behaviors()
     {
         return [
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
-                    throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
-                },
-                'rules'=>[
+//            'access'=>[
+//                'class'=>AccessControl::className(),
+//                'denyCallback' => function ($rule, $action) {
+//                    throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
+//                },
+//                'rules'=>[
+////                    [
+////                        'allow'=>true,
+////                        'actions'=>['index','create','update','delete','view'],
+////                        'roles'=>['@'],
+////                    ]
 //                    [
 //                        'allow'=>true,
-//                        'actions'=>['index','create','update','delete','view'],
 //                        'roles'=>['@'],
+//                        'matchCallback'=>function($rule,$action){
+//                            $currentRoute = Yii::$app->controller->getRoute();
+//                            if(Yii::$app->user->can($currentRoute)){
+//                                return true;
+//                            }
+//                        }
 //                    ]
-                    [
-                        'allow'=>true,
-                        'roles'=>['@'],
-                        'matchCallback'=>function($rule,$action){
-                            $currentRoute = Yii::$app->controller->getRoute();
-                            if(Yii::$app->user->can($currentRoute)){
-                                return true;
-                            }
-                        }
-                    ]
-                ]
-            ],
+//                ]
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -175,11 +175,7 @@ class DbrestoreController extends Controller
                 }
 
 
-            }else{
-                echo "cannot save file.";
             }
-        }else{
-            echo "empty file.";
         }
 
     }
@@ -238,7 +234,7 @@ class DbrestoreController extends Controller
         $username = "root";
         // $password = "'" . "Ning0615410888$$" . "'";
         $password = "";
-        $database_name = "vorapat";
+        $database_name = "mind_acc";
         $date_string = time();
 
         $cmd = '';

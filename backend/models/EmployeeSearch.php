@@ -11,13 +11,16 @@ use backend\models\Employee;
  */
 class EmployeeSearch extends Employee
 {
+    /**
+     * {@inheritdoc}
+     */
     public $globalSearch;
     public function rules()
     {
         return [
-            [['id', 'gender', 'position', 'salary_type', 'status', 'company_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['code', 'fname', 'lname', 'emp_start', 'description', 'photo'], 'safe'],
-            [['globalSearch'],'string']
+            [['id', 'prefix', 'site_id', 'department_id', 'section_id', 'position_id', 'user_relation', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['emp_code', 'first_name', 'last_name', 'nickname', 'phone', 'email', 'note', 'photo_profile'], 'safe'],
+            [['globalSearch'], 'string'],
         ];
     }
 
@@ -56,34 +59,29 @@ class EmployeeSearch extends Employee
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'gender' => $this->gender,
-            'position' => $this->position,
-            'salary_type' => $this->salary_type,
-            'emp_start' => $this->emp_start,
-            'status' => $this->status,
-            'company_id' => $this->company_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
-        ]);
+//        $query->andFilterWhere([
+//            'id' => $this->id,
+//            'prefix' => $this->prefix,
+//            'site_id' => $this->site_id,
+//            'department_id' => $this->department_id,
+//            'section_id' => $this->section_id,
+//            'position_id' => $this->position_id,
+//            'user_relation' => $this->user_relation,
+//            'status' => $this->status,
+//            'created_at' => $this->created_at,
+//            'updated_at' => $this->updated_at,
+//            'created_by' => $this->created_by,
+//            'updated_by' => $this->updated_by,
+//        ]);
 
-        if (!empty(\Yii::$app->user->identity->company_id)) {
-            $query->andFilterWhere(['company_id' => \Yii::$app->user->identity->company_id]);
-        }
-        if (!empty(\Yii::$app->user->identity->branch_id)) {
-            $query->andFilterWhere(['branch_id' => \Yii::$app->user->identity->branch_id]);
-        }
-
-        if($this->globalSearch != ''){
-            $query->orFilterWhere(['like', 'code', $this->globalSearch])
-                ->orFilterWhere(['like', 'fname', $this->globalSearch])
-                ->orFilterWhere(['like', 'lname', $this->globalSearch])
-                ->orFilterWhere(['like', 'description', $this->globalSearch])
-                ->orFilterWhere(['like', 'photo', $this->globalSearch]);
-        }
+        $query->orFilterWhere(['like', 'emp_code', $this->globalSearch])
+            ->orFilterWhere(['like', 'first_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'last_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'nickname', $this->globalSearch])
+            ->orFilterWhere(['like', 'phone', $this->globalSearch])
+            ->orFilterWhere(['like', 'email', $this->globalSearch])
+            ->orFilterWhere(['like', 'note', $this->globalSearch])
+            ->orFilterWhere(['like', 'photo_profile', $this->globalSearch]);
 
         return $dataProvider;
     }

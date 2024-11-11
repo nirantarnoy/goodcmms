@@ -2,13 +2,10 @@
 
 namespace backend\controllers;
 
-use backend\models\PositionSearch;
 use Yii;
 use backend\models\Usergroup;
 use backend\models\UsergroupSearch;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -29,24 +26,6 @@ class UsergroupController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-//            'access'=>[
-//                'class'=>AccessControl::className(),
-//                'denyCallback' => function ($rule, $action) {
-//                    throw new ForbiddenHttpException('คุณไม่ได้รับอนุญาติให้เข้าใช้งาน!');
-//                },
-//                'rules'=>[
-//                    [
-//                        'allow'=>true,
-//                        'roles'=>['@'],
-//                        'matchCallback'=>function($rule,$action){
-//                            $currentRoute = \Yii::$app->controller->getRoute();
-//                            if(\Yii::$app->user->can($currentRoute)){
-//                                return true;
-//                            }
-//                        }
-//                    ]
-//                ]
-//            ],
         ];
     }
 
@@ -57,9 +36,10 @@ class UsergroupController extends Controller
     public function actionIndex()
     {
         $pageSize = \Yii::$app->request->post("perpage");
+
         $searchModel = new UsergroupSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->setSort(['defaultOrder' => ['id' => SORT_DESC]]);
+
         $dataProvider->pagination->pageSize = $pageSize;
 
         return $this->render('index', [
@@ -92,9 +72,7 @@ class UsergroupController extends Controller
         $model = new Usergroup();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $session = \Yii::$app->session;
-            $session->setFlash('msg', 'บันทึกรายการเรียบร้อย');
-            return $this->redirect(['usergroup/index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -114,9 +92,7 @@ class UsergroupController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $session = \Yii::$app->session;
-            $session->setFlash('msg', 'บันทึกรายการเรียบร้อย');
-            return $this->redirect(['usergroup/index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
