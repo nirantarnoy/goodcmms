@@ -72,7 +72,7 @@ class LocationController extends Controller
         $model = new Location();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->warehouse_id = \Yii::$app->request->post('warehouse');
+           // $model->warehouse_id = \Yii::$app->request->post('warehouse');
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -95,7 +95,7 @@ class LocationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->warehouse_id = \Yii::$app->request->post('warehouse');
+           // $model->warehouse_id = \Yii::$app->request->post('warehouse');
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }

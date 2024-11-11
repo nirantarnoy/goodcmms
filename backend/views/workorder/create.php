@@ -10,12 +10,8 @@ $this->params['breadcrumbs'][] = ['label' => 'คำสั่งแจ้งซ�
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="workorder-create">
-
-
             <?= $this->render('_form', [
                 'model' => $model,
                 'runno' => $runno,
             ]) ?>
-
-
 </div>

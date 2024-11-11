@@ -2,43 +2,47 @@
 
 namespace backend\controllers;
 
-use Yii;
-use backend\models\Section;
-use backend\models\SectionSearch;
+use backend\models\Assetbrand;
+use backend\models\AssetbrandSearch;
+use backend\models\LocationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SectionController implements the CRUD actions for Section model.
+ * AssetbrandController implements the CRUD actions for Assetbrand model.
  */
-class SectionController extends Controller
+class AssetbrandController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST','GET'],
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
                 ],
-            ],
-        ];
+            ]
+        );
     }
 
     /**
-     * Lists all Section models.
-     * @return mixed
+     * Lists all Assetbrand models.
+     *
+     * @return string
      */
     public function actionIndex()
     {
         $pageSize = \Yii::$app->request->post("perpage");
 
-        $searchModel = new SectionSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new AssetbrandSearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
         $dataProvider->pagination->pageSize = $pageSize;
 
@@ -50,9 +54,9 @@ class SectionController extends Controller
     }
 
     /**
-     * Displays a single Section model.
-     * @param integer $id
-     * @return mixed
+     * Displays a single Assetbrand model.
+     * @param int $id ID
+     * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
@@ -63,19 +67,20 @@ class SectionController extends Controller
     }
 
     /**
-     * Creates a new Section model.
+     * Creates a new Assetbrand model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Section();
+        $model = new Assetbrand();
 
-        if ($model->load(Yii::$app->request->post())) {
-           // $model->department_id = \Yii::$app->request->post('department');
-            if($model->save(false)){
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
+        } else {
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -84,21 +89,18 @@ class SectionController extends Controller
     }
 
     /**
-     * Updates an existing Section model.
+     * Updates an existing Assetbrand model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * @param int $id ID
+     * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            //$model->department_id = \Yii::$app->request->post('department');
-            if($model->save(false)){
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -107,10 +109,10 @@ class SectionController extends Controller
     }
 
     /**
-     * Deletes an existing Section model.
+     * Deletes an existing Assetbrand model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * @param int $id ID
+     * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
@@ -121,15 +123,15 @@ class SectionController extends Controller
     }
 
     /**
-     * Finds the Section model based on its primary key value.
+     * Finds the Assetbrand model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Section the loaded model
+     * @param int $id ID
+     * @return Assetbrand the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Section::findOne($id)) !== null) {
+        if (($model = Assetbrand::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

@@ -31,6 +31,7 @@ use Yii;
  */
 class Asset extends \yii\db\ActiveRecord
 {
+    public $photo;
     /**
      * {@inheritdoc}
      */
@@ -46,8 +47,9 @@ class Asset extends \yii\db\ActiveRecord
     {
         return [
             [['asset_name','asset_group_id'],'required'],
-            [['asset_group_id', 'site_id', 'department_id', 'section_id', 'asset_location_id', 'critical', 'asset_cat_id', 'asset_status', 'responsible', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['asset_no', 'asset_name', 'description', 'manufacturer', 'brand', 'asset_model', 'note'], 'string', 'max' => 255],
+            [['asset_group_id', 'site_id', 'department_id', 'section_id', 'asset_location_id', 'critical', 'asset_cat_id', 'asset_status', 'responsible', 'created_at', 'updated_at', 'created_by', 'updated_by','warranty_month_qty','warranty_year_qty'], 'integer'],
+            [['asset_no', 'asset_name', 'description', 'manufacturer', 'brand', 'asset_model', 'note','asset_serial_no'], 'string', 'max' => 255],
+            [['asset_recieve_date','exp_warranty_date'],'safe'],
         ];
     }
 
@@ -74,7 +76,11 @@ class Asset extends \yii\db\ActiveRecord
             'asset_status' => 'สถานะ',
             'responsible' => 'ผู้รับผิดชอบ',
             'note' => 'บันทึกอื่นๆ',
+            'asset_serial_no'=>'Serial No',
             'created_at' => 'สร้างเมื่อ',
+            'asset_recieve_date'=>'วันที่รับเข้าระบบ',
+            'warranty_month_qty' => 'จำนวนประกัน(เดือน)',
+            'exp_warranty_date' => 'วันที่หมดประกัน',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',

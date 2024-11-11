@@ -19,8 +19,11 @@ $dept = \backend\models\Department::find()->all();
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'department_id')->widget(\kartik\select2\Select2::className(), [
-        'data' => \yii\helpers\ArrayHelper::map(\backend\models\Department::find()->all(), 'id', 'name'),
+        'data' => \yii\helpers\ArrayHelper::map(\backend\models\Department::find()->where(['status'=>1])->all(), 'id', function ($model) {
+            return $model->code . ' (' . $model->name . ')';
+        }),
         'options' => [
             'placeholder' => 'select department',
         ],

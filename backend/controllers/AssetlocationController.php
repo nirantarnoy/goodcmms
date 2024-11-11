@@ -72,8 +72,8 @@ class AssetlocationController extends Controller
         $model = new Assetlocation();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->department_id = \Yii::$app->request->post('department');
-            $model->section_id = \Yii::$app->request->post('section');
+//            $model->department_id = \Yii::$app->request->post('department');
+//            $model->section_id = \Yii::$app->request->post('section');
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -96,8 +96,8 @@ class AssetlocationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->department_id = \Yii::$app->request->post('department');
-            $model->section_id = \Yii::$app->request->post('section');
+//            $model->department_id = \Yii::$app->request->post('department');
+//            $model->section_id = \Yii::$app->request->post('section');
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }

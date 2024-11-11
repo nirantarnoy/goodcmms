@@ -34,7 +34,7 @@ class Section extends \yii\db\ActiveRecord
     {
         return [
             [['name','department_id'],'required'],
-            [['department_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['department_id', 'created_at', 'updated_at', 'created_by', 'updated_by','status'], 'integer'],
             [['code', 'name', 'description'], 'string', 'max' => 255],
         ];
     }

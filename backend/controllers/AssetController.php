@@ -70,6 +70,7 @@ class AssetController extends Controller
     public function actionCreate()
     {
         $model = new Asset();
+        $model_asset_photo = null;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,6 +78,7 @@ class AssetController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'model_asset_photo' => $model_asset_photo,
         ]);
     }
 
@@ -90,6 +92,7 @@ class AssetController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model_asset_photo = null;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -97,6 +100,7 @@ class AssetController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'model_asset_photo' => $model_asset_photo,
         ]);
     }
 
