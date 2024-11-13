@@ -13,8 +13,6 @@ $this->title = 'พนักงาน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-index">
-
-    <br>
     <div class="row">
         <div class="col-lg-10">
             <p>
@@ -76,6 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'created_by',
             //'updated_by',
+            [
+                'attribute'=>'status',
+                'format' => 'raw',
+                'value' => function($model){
+                    return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                }
+            ],
             [
 
                 'header' => 'ตัวเลือก',

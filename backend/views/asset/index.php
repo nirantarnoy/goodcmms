@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="asset-index">
 <div class="panel panel-body">
-
-    <br>
     <div class="row">
         <div class="col-lg-10">
             <p>
@@ -81,14 +79,20 @@ $this->params['breadcrumbs'][] = $this->title;
             //'brand',
             //'asset_model',
             //'asset_cat_id',
-            'asset_status',
+            //'asset_status',
             //'responsible',
             //'note',
             //'created_at',
             //'updated_at',
             //'created_by',
             //'updated_by',
-
+            [
+                'attribute'=>'asset_status',
+                'format' => 'raw',
+                'value' => function($model){
+                    return \backend\helpers\YesNo::getTypeByNameHtml($model->asset_status);
+                }
+            ],
             [
 
                 'header' => '',

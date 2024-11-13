@@ -57,7 +57,8 @@ $is_pos_user = 0;
             font-family: 'Kanit-Regular';
             /*font-family: 'TH-Sarabun-New';*/
             /*src: url('fonts/THSarabunNew.ttf') format('truetype');*/
-            src: url('fonts/Kanit-Regular.ttf') format('truetype');
+            /*src: url('fonts/Kanit-Regular.ttf') format('truetype');*/
+            src: url('fonts/Prompt/Prompt-Light.ttf') format('truetype');
             /*src: url('../../backend/web/fonts/Kanit-Regular.ttf') format('truetype');*/
             /* src: url('../fonts/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
                   url('../fonts/thsarabunnew-webfont.woff') format('woff'),

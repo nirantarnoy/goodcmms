@@ -70,7 +70,7 @@
                         <li class="nav-item">
                             <a href="index.php?r=location/index" class="nav-link location">
                                 <i class="far fa-circlezz nav-icon"></i>
-                                <p>ล็อคจัดเก็บ</p>
+                                <p>Loc จัดเก็บ</p>
                             </a>
                         </li>
                         <li class="nav-item">

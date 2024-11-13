@@ -75,7 +75,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'average_cose',
             'type_id',
             //'created_at',
-
+            [
+                'attribute'=>'status',
+                'format' => 'raw',
+                'value' => function($model){
+                    return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                }
+            ],
             [
 
                 'header' => '',

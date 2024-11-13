@@ -12,12 +12,8 @@ use yii\helpers\Url;
 $this->title = 'แผนก';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<br>
 <div class="section-index">
-
     <div class="panel panel-body">
-
-
         <div class="row">
             <div class="col-lg-10">
                 <p>

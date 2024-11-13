@@ -58,7 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
             'name',
             'description',
-            'status',
+            [
+                    'attribute'=>'status',
+                    'format' => 'raw',
+                    'value' => function($model){
+                          return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                    }
+            ],
             'created_at',
                 [
 

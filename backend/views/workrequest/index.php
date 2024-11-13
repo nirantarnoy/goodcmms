@@ -15,15 +15,21 @@ $this->params['breadcrumbs'][] = $this->title;
 $perpage = 20;
 ?>
 <div class="workrequest-index">
-
     <div class="panel panel-body">
-
-        <br>
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-1">
                 <p>
                     <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> สร้างใหม่'), ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
+            </div>
+            <div class="col-lg-9">
+                <div class="btn-group">
+                    <div class="btn btn-success">All</div>
+                    <div class="btn btn-secondary">Opened</div>
+                    <div class="btn btn-secondary">Approved</div>
+                    <div class="btn btn-secondary">Rejected</div>
+                    <div class="btn btn-secondary">Closed</div>
+                </div>
             </div>
             <div class="col-lg-2" style="text-align: right">
                 <form id="form-perpage" class="form-inline" action="<?= Url::to(['workrequest/index'], true) ?>"
@@ -40,19 +46,6 @@ $perpage = 20;
                 </form>
             </div>
         </div>
-
-        <div class="pull-left" style="padding-left: 3px;">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Batch actions
-                    <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Firm workorder</a></li>
-                    <li><a href="#">Reject</a></li>
-                    <li><a href="#">Delete</a></li>
-                </ul>
-            </div>
-        </div>
-        <br>
         <?php Pjax::begin(); ?>
         <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 

@@ -13,11 +13,7 @@ $this->title = 'งาน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tasklist-index">
-
     <div class="panel panel-body">
-
-        <br>
-
         <div class="row">
             <div class="col-lg-10">
                 <p>

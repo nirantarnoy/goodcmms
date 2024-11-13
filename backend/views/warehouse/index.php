@@ -12,11 +12,8 @@ use yii\helpers\Url;
 $this->title = 'คลังสินค้า';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<br>
 <div class="warehouse-index">
     <div class="panel panel-body">
-
-
         <div class="row">
             <div class="col-lg-10">
                 <p>
@@ -65,8 +62,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'code',
                 'name',
                 'description',
-                'status',
-                'isdefault',
+                [
+                    'attribute'=>'status',
+                    'format' => 'raw',
+                    'value' => function($model){
+                        return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                    }
+                ],
+                [
+                        'attribute'=>'isdefault',
+                       'format' => 'raw',
+                       'value' => function($model){
+                          return \backend\helpers\YesNo::getYesNoByHtml($model->isdefault);
+                       }
+                ],
                 //'created_at',
                 //'updated_at',
                 //'created_by',

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Tasklist */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'งาน', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'รายการตรวจเช็ค', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

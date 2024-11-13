@@ -9,14 +9,12 @@ use yii\helpers\Url;
 /* @var $searchModel backend\models\LocationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'ล๊อคจัดเก็บ';
+$this->title = 'Loc จัดเก็บ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
 <div class="location-index">
     <div class="panel panel-body">
-
-
         <div class="row">
             <div class="col-lg-10">
                 <p>
@@ -71,7 +69,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         return \backend\models\Warehouse::findName($data->warehouse_id);
                     }
                 ],
-                //'status',
+                [
+                    'attribute'=>'status',
+                    'format' => 'raw',
+                    'value' => function($model){
+                        return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                    }
+                ],
                 //'isdefault',
                 //'created_at',
                 //'updated_at',

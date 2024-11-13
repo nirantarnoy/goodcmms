@@ -13,11 +13,7 @@ $this->title = 'คำสั่งแจ้งซ่อม';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="workorder-index">
-
     <div class="panel panel-body">
-
-        <br>
-
         <div class="row">
             <div class="col-lg-10">
                 <p>

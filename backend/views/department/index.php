@@ -12,11 +12,7 @@ use yii\helpers\Url;
 $this->title = 'ฝ่าย';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<br>
 <div class="department-index">
-
-    <div class="panel panel-body">
-
 
         <div class="row">
             <div class="col-lg-10">
@@ -73,6 +69,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'created_by',
                 //'updated_by',
                 [
+                    'attribute'=>'status',
+                    'format' => 'raw',
+                    'value' => function($model){
+                        return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                    }
+                ],
+                [
 
                     'header' => '',
                     'headerOptions' => ['style' => 'text-align:center;', 'class' => 'activity-view-link',],
@@ -125,6 +128,6 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'pager' => ['class' => LinkPager::className()],
         ]); ?>
         <?php Pjax::end(); ?>
-    </div>
+
 </div>
 <br>

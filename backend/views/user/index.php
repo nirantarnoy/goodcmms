@@ -13,10 +13,7 @@ $this->title = 'ผู้ใช้งาน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
     <div class="panel panel-body">
-
-        <br>
         <div class="row">
             <div class="col-lg-10">
                 <p>
@@ -64,7 +61,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'password_hash',
                 //'password_reset_token',
                 //'email:email',
-                'status',
+                [
+                    'attribute'=>'status',
+                    'format' => 'raw',
+                    'value' => function($model){
+                        return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                    }
+                ],
                 //'created_at',
                 //'updated_at',
                 [

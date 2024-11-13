@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /** @var yii\web\View $this */
 /** @var backend\models\AssetbrandSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -14,10 +15,7 @@ $this->title = 'ยี่ห้ออุปกรณ์';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assetbrand-index">
-
     <div class="panel panel-body">
-
-
         <div class="row">
             <div class="col-lg-10">
                 <p>
@@ -41,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <?php Pjax::begin(); ?>
-        <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -62,14 +60,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'headerOptions' => ['style' => 'text-align: center'],
                     'contentOptions' => ['style' => 'text-align: center'],
                 ],
-            'name',
-            'description',
-            'asset_group_id',
-            'status',
-            //'created_at',
-            //'created_by',
-            //'updated_at',
-            //'udpated_by',
+                'name',
+                'description',
+                'asset_group_id',
+                [
+                    'attribute' => 'status',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                    }
+                ],
+                //'created_at',
+                //'created_by',
+                //'updated_at',
+                //'udpated_by',
                 [
 
                     'header' => '',

@@ -12,11 +12,7 @@ $this->title = 'ที่ตั้งเครื่องจักร์/อุ
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assetlocation-index">
-
   <div class="panel panel-body">
-
-      <br>
-
       <div class="row">
           <div class="col-lg-10">
               <p>
@@ -74,7 +70,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'created_by',
             //'updated_by',
-
+            [
+                'attribute'=>'status',
+                'format' => 'raw',
+                'value' => function($model){
+                    return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                }
+            ],
             [
 
                 'header' => '',

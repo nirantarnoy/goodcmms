@@ -12,10 +12,7 @@ $this->title = 'ประเภทใบสั่งงาน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="worktype-index">
-
     <div class="panel panel-body">
-
-        <br>
         <div class="row">
             <div class="col-lg-10">
                 <p>
@@ -61,11 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'code',
             'name',
             'description',
-            'status',
-            //'created_at',
-            //'updated_at',
-            //'created_by',
-            //'updated_by',
+            [
+                'attribute'=>'status',
+                'format' => 'raw',
+                'value' => function($model){
+                    return \backend\helpers\YesNo::getTypeByNameHtml($model->status);
+                }
+            ],
 
             [
 
